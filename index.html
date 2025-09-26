@@ -316,18 +316,23 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 1000;
+            outline: none;
         }
 
         .scroll-to-top.visible {
-            opacity: 0.7;
+            opacity: 1;
             visibility: visible;
         }
 
         .scroll-to-top:hover {
-            opacity: 1;
             background: #000;
             color: #fff;
+            border-color: #000;
             transform: translateY(-3px);
+        }
+
+        .scroll-to-top:focus {
+            outline: none;
         }
 
         @media (max-width: 768px) {
@@ -362,7 +367,7 @@
         <div class="header">
             <div class="org-name">IRGIU / CANVI</div>
             <div class="doc-type">Intelligence Brief</div>
-            <h1>The Rise of Right-Wing Populism in the United Kingdom</h1>
+            <h1>The Rise of Right-Wing Populism<br>in the United Kingdom</h1>
             <div class="subtitle">Immigration, Identity, and Political Shifts</div>
         </div>
 
@@ -1063,17 +1068,25 @@
         </div>
     </div>
 
-    <button class="scroll-to-top" id="scrollToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
 
     <script>
-        // Show/hide scroll to top button
-        window.addEventListener('scroll', function() {
-            const scrollButton = document.getElementById('scrollToTop');
+        // Scroll to top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                scrollButton.classList.add('visible');
+                scrollToTopBtn.classList.add('visible');
             } else {
-                scrollButton.classList.remove('visible');
+                scrollToTopBtn.classList.remove('visible');
             }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     </script>
 </body>
